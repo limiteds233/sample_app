@@ -6,7 +6,7 @@ Rails.application.routes.draw do
  get 'static_pages/about'
 get 'static_pages/contact'
 get 'users/new' 
-get 'login' => 'sessions#new''sessions#new'
+get 'login' => 'sessions#new'
 post 'login' => 'sessions#create'
 delete 'logout' => 'sessions#destroy'
 

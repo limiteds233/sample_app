@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class UsersLoginTest < ActionDispatch::IntegrationTest
+
+    def setup
+        @user = users(:michael)
+    end
+    
   test "login with invalid information" do
     get 'sessions#new'
     assert_template 'sessions/new'

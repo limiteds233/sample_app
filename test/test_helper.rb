@@ -12,5 +12,12 @@ class ActiveSupport::TestCase
   fixtures :all
   include ApplicationHelper
 
+  class ActiveSupport::TestCase
+    fixtures :all
+# Возвращает true, если тестовый пользователь вошел.
+    def is_logged_in?
+    !session[:user_id].nil?
+    end
+
   # Add more helper methods to be used by all tests here...
 end

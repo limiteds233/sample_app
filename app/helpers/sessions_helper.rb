@@ -9,6 +9,11 @@ module SessionsHelper
         cookies.permanent.signed[:user_id] = user.id
         cookies.permanent[:remember_token] = user.remember_token
     end
+
+    # Возвращает true, если данный пользователь является текущим.
+    def current_user?(user)
+        user == current_user
+    end
 # Возвращает текущего вошедшего пользователя (если есть).
     # Возвращает пользователя, соответствующего токену в cookie.
     def current_user
@@ -23,6 +28,7 @@ module SessionsHelper
         end
     end
 end
+
     # Возвращает true, если пользователь зарегистрирован, иначе возвращает false.
     def logged_in?
         !current_user.nil?

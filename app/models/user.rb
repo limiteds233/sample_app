@@ -53,6 +53,13 @@ class User < ActiveRecord::Base
     def new_token
         SecureRandom.urlsafe_base64
     end
+
+    # Возвращает true, если указанный токен соответствует дайджесту.
+    def authenticated?(attribute, token)
+        digest = send("#{attribute}_digest")
+        return false if digest.nil?
+        BCrypt::Password.new(digest).is_password?(token)
+    end
     # Преобразует адрес электронной почты в нижний регистр.
     def downcase_email
         self.email = email.downcase

@@ -69,6 +69,17 @@ class User < ActiveRecord::Base
         self.activation_token = User.new_token
         self.activation_digest = User.digest(activation_token)
     end
+    .
+# Активирует учетную запись.
+    def activate
+        update_attribute(:activated, true)
+        update_attribute(:activated_at, Time.zone.now)
+    end
+    # Посылает письмо со ссылкой на страницу активации.
+    def send_activation_email
+        UserMailer.account_activation(self).deliver_now
+    end
+    private
 end
 end
 end

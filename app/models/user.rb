@@ -82,4 +82,3 @@ class User < ActiveRecord::Base
     private
 end
 end
-end

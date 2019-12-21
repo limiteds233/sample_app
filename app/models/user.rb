@@ -72,8 +72,7 @@ class User < ActiveRecord::Base
     .
 # Активирует учетную запись.
     def activate
-        update_attribute(:activated, true)
-        update_attribute(:activated_at, Time.zone.now)
+        update_columns(activated: FILL_IN, activated_at: FILL_IN)
     end
     # Посылает письмо со ссылкой на страницу активации.
     def send_activation_email
@@ -81,9 +80,9 @@ class User < ActiveRecord::Base
     end
         # Устанавливает атрибуты для сброса пароля.
     def create_reset_digest
-        self.reset_token = User.new_token
-        update_attribute(:reset_digest, User.digest(reset_token))
-        update_attribute(:reset_sent_at, Time.zone.now)
+       self.reset_token = User.new_token
+        update_columns(reset_digest: FILL_IN,
+        reset_sent_at: FILL_IN)
     end
 
     # Посылает письмо со ссылкой на форму ввода нового пароля.

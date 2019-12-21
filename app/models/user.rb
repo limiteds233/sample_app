@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
     def send_activation_email
         UserMailer.account_activation(self).deliver_now
     end
-    # Устанавливает атрибуты для сброса пароля.
+        # Устанавливает атрибуты для сброса пароля.
     def create_reset_digest
         self.reset_token = User.new_token
         update_attribute(:reset_digest, User.digest(reset_token))
@@ -90,6 +90,11 @@ class User < ActiveRecord::Base
     def send_password_reset_email
         UserMailer.password_reset(self).deliver_now
     end
+
+    def password_reset_expired?
+        reset_sent_at < 2.hours.ago
+    end
+
     private
 end
 end
